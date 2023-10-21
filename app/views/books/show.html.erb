@@ -1,2 +1,44 @@
-<h1>Books#show</h1>
-<p>Find me in app/views/books/show.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <h1>User info</h1>
+      <%= image_tag @book.user.get_profile_image(100,100) %>
+      <table class="table">
+        <tbody>
+          <tr>
+            <th scope="row">name</th>
+            <td><%= @book.user.name %></td>
+          </tr>
+          <tr>
+            <th scope="row">introduction</th>
+            <td><%= @book.user.introduction %></td>
+          </tr>
+        </tbody>
+      </table>
+      <%= link_to edit_book_path(book_path), class: "btn btn-outline-secondary btn-block" do %>
+        <i class="fa-solid fa-user-gear"></i>
+      <% end %>
+
+      <%= render 'layouts/body', book:@book %>
+    </div>
+    <div class="col-md-8 offset-md-1">
+      <h2>Book detail</h2>
+      <table class="table table-hover">
+        <thead>
+        </thead>
+        <tbody>
+          <tr>
+            <td><%= link_to user_path(@book.user) do %><%= image_tag @book.user.get_profile_image(100,100) %>
+              <p><%= link_to @book.user.name, book_path(@book.user) %></p>
+            <% end %></td>
+            <td><%= link_to @book.title, book_path(@book) %></td>
+            <td><%= @book.body %></td>
+            <td><%= link_to "Edit",edit_book_path(@book.id), class: "btn btn-sm btn-success" %></td>
+            <td><%= link_to "Destroy", book_path(@book), method: :delete, class: "btn btn-sm btn-danger" , "data-confirm" => "本当に削除しますか？"%></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
