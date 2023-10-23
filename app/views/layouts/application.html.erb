@@ -13,8 +13,9 @@
 
   <body>
     <%= render 'layouts/header' %>
-
-
+    <% flash.each do |key, message| %>
+      <%= message %>
+    <% end %>
     <%= yield %>
     <%= render 'layouts/footer' %>
   </body>

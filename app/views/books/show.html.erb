@@ -1,28 +1,16 @@
-<div>
-  <%= flash[:notice] %>
-</div>
 <div class="container">
   <div class="row">
     <div class="col-md-3">
-      <h1>User info</h1>
-      <%= image_tag @book.user.get_profile_image(100,100) %>
-      <table class="table">
-        <tbody>
-          <tr>
-            <th scope="row">name</th>
-            <td><%= @book.user.name %></td>
-          </tr>
-          <tr>
-            <th scope="row">introduction</th>
-            <td><%= @book.user.introduction %></td>
-          </tr>
-        </tbody>
-      </table>
-      <%= link_to edit_user_path(@book.user), class: "btn btn-outline-secondary btn-block" do %>
-        <i class="fa-solid fa-user-gear"></i>
+      <% if @book.errors.any? %>
+        <%= @book.errors.count %>error prohibited this obj from being saved:
+        <ul>
+          <% @book.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
       <% end %>
-
-      <%= render 'layouts/body', book:@book %>
+      <%= render 'layouts/info', user:@book.user %>
+      <%= render 'layouts/body', book:@booknew %>
     </div>
     <div class="col-md-8 offset-md-1">
       <h2>Book detail</h2>
